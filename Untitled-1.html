@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Uma Surpresa Para Você ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400&display=swap');
+
+        :root {
+            --neon-pink: #ff00ff;
+            --dark-bg: #0a0a0a;
+            --light-text: #f0f0f0;
+            --box-bg: rgba(30, 30, 30, 0.85);
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            touch-action: manipulation;
+        }
+
+        #heart-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .heart-svg {
+            position: absolute;
+            will-change: transform, opacity;
+            animation: floatUp 6s ease-in forwards;
+        }
+
+        .heart-path {
+            fill: none;
+            stroke: var(--neon-pink);
+            stroke-width: 4;
+            filter: drop-shadow(0 0 5px var(--neon-pink));
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) scale(0.3) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translateY(-20vh) scale(1.5) rotate(45deg); opacity: 0; }
+        }
+
+        #content-box {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .content-section {
+            background-color: var(--box-bg);
+            padding: 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 0, 255, 0.3);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.2);
+            display: none;
+            text-align: center;
+            animation: fadeIn 0.8s ease-out forwards;
+            max-height: 85vh;
+            overflow-y: auto; /* Permite rolar se o texto for muito longo */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .content-section img.main-img {
+            width: 100%;
+            height: auto;
+            max-height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            border: 2px solid var(--neon-pink);
+        }
+
+        .content-section h1 {
+            font-family: 'Dancing Script', cursive;
+            color: var(--neon-pink);
+            font-size: 2em;
+            margin: 10px 0;
+            text-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        .content-section p {
+            font-size: 0.95em;
+            line-height: 1.5;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        /* Estilo do Carrossel Final */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 15px;
+            margin: 15px 0;
+            border: 2px solid var(--neon-pink);
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            object-fit: cover;
+        }
+
+        .carousel-slide.visible {
+            opacity: 1;
+        }
+
+        #click-prompt {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            color: #888;
+            font-size: 0.8em;
+            z-index: 20;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <svg style="position: absolute; width: 0; height: 0;">
+        <defs>
+            <path id="heart-shape" d="M50 16.22C27 8.5 0 28.3 0 48.9c0 20.7 21.5 37.5 50 65c28.5-27.5 50-44.3 50-65C100 28.3 73 8.5 50 16.22z"/>
+        </defs>
+    </svg>
+
+    <div id="heart-container"></div>
+
+    <main id="content-box">
+        <section id="section0" class="content-section active">
+            <img src="assets/1.jpeg" class="main-img" alt="Nossa Foto">
+            <h1>Para você...</h1>
+            <p>Eu só queria te lembrar o quanto você é especial para mim. Toque para continuar...</p>
+        </section>
+
+        <section id="section1" class="content-section">
+            <img src="assets/2.jpeg" class="main-img" alt="Nós Dois">
+            <h1>Cada momento...</h1>
+            <p>Ao seu lado é uma nova descoberta, uma nova memória e uma nova risada que eu dou.</p>
+        </section>
+
+        <section id="section2" class="content-section">
+            <img src="assets/3.jpeg" class="main-img" alt="Te amo">
+            <h1>Eu Te Amo ❤️</h1>
+            <p>De uma maneira que você não deve ter noção, você é muito mais que minha namorada, você é minha vida, minha melhor amiga, minha companheira e alguém que eu quero passar ao lado o resto da minha vida toda.</p>
+        </section>
+
+        <section id="section3" class="content-section">
+            <img src="assets/4.jpeg" class="main-img" alt="Apoio">
+            <h1>Amor</h1>
+            <p>As vezes podemos estar passando por algum momento dificil em nossas vidas ou apenas algumas mudanças, mas saiba que estarei ao seu lado sempre, não importa sua escolha de profissão, sua escolha de vida ou qualquer coisa do tipo, eu sempre estarei ao seu lado te apoiando e mesmo que todos desacretidem de você, saiba que por mais impossivel que pareça, eu nunca desistirei ou duvidarei.</p>
+        </section>
+
+        <section id="section4" class="content-section">
+            <img src="assets/5.jpeg" class="main-img" alt="Refúgio">
+            <h1>O melhor lugar...</h1>
+            <p>Lembro que sempre que não conseguimos dormir juntos eu fico mal, mas não é pelo fato de dormir, mas sim pelo fato de estarmos juntos, de estarmos abraçados e de que eu posso muitas vezes finalizar um dia estressante ao seu lado, que é literalmente o melhor lugar do mundo pra mim, você é a pessoa que mais me faz bem e onde eu realmente me sinto bem em ser quem eu sou, de ser real, e mesmo eu brincando diversas vezes de você não me amar mais que eu ou eu fazer algum drama do tipo, pode ficar sabendo que você é com certeza a pessoa que eu mais me sinto amado quando estou junto, a pessoa que mais me faz sentir e ver o lado bom da vida e cada dia que passa eu vejo e percebo mais isso.</p>
+        </section>
+
+        <section id="section5" class="content-section">
+            <img src="assets/6.jpeg" class="main-img" alt="Sentimento">
+            <h1>...</h1>
+            <p>Escrevendo isso agora me fez lembrar do quão especial você é na minha vida e o quão bem você faz por mim, e isso faz eu amar te amar.</p>
+        </section>
+
+        <section id="section6" class="content-section">
+            <img src="assets/7.jpeg" class="main-img" alt="Para sempre">
+            <h1>Te amo mais que tudo! ❤️</h1>
+            <p>Você é a melhor parte do meu dia, hoje e sempre.</p>
+        </section>
+
+        <section id="section7" class="content-section">
+            <h1>Nossa História ❤️</h1>
+            <p>Nossos momentos até hoje, março de 2026!</p>
+            
+            <div class="carousel-container">
+                <img src="assets/8.jpeg" class="carousel-slide visible">
+                <img src="assets/9.jpeg" class="carousel-slide">
+                <img src="assets/10.jpeg" class="carousel-slide">
+                <img src="assets/11.jpeg" class="carousel-slide">
+                <img src="assets/12.jpeg" class="carousel-slide">
+                <img src="assets/13.jpeg" class="carousel-slide">
+                <img src="assets/14.jpeg" class="carousel-slide">
+                <img src="assets/15.jpeg" class="carousel-slide">
+                <img src="assets/16.jpeg" class="carousel-slide">
+                <img src="assets/17.jpeg" class="carousel-slide">
+                <img src="assets/18.jpeg" class="carousel-slide">
+                <img src="assets/19.jpeg" class="carousel-slide">
+                <img src="assets/20.jpeg" class="carousel-slide">
+                <img src="assets/21.jpeg" class="carousel-slide">
+            </div>
+
+            <p style="font-size: 0.8em; color: var(--neon-pink); font-weight: bold;">
+                Eu te amo infinitamente!
+            </p>
+        </section>
+    </main>
+
+    <div id="click-prompt">Toque na tela para continuar</div>
+
+    <script>
+        const heartContainer = document.getElementById('heart-container');
+        const sections = document.querySelectorAll('.content-section');
+        const clickPrompt = document.getElementById('click-prompt');
+        let currentStep = 0;
+
+        function createHeart() {
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+            use.setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#heart-shape');
+            use.classList.add('heart-path');
+            svg.appendChild(use);
+            svg.classList.add('heart-svg');
+
+            const size = Math.random() * 25 + 15; 
+            svg.setAttribute('width', size);
+            svg.setAttribute('height', size);
+            svg.setAttribute('viewBox', '0 0 100 115');
+            
+            svg.style.left = Math.random() * 100 + 'vw';
+            svg.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            
+            heartContainer.appendChild(svg);
+            svg.addEventListener('animationend', () => svg.remove());
+        }
+
+        function startHeartBurst(count) {
+            for(let i=0; i<count; i++) {
+                setTimeout(createHeart, i * 150);
+            }
+        }
+
+        function startCarousel() {
+            const slides = document.querySelectorAll('.carousel-slide');
+            let slideIndex = 0;
+            if (slides.length === 0) return;
+            
+            setInterval(() => {
+                slides[slideIndex].classList.remove('visible');
+                slideIndex = (slideIndex + 1) % slides.length;
+                slides[slideIndex].classList.add('visible');
+            }, 3000);
+        }
+
+        function nextStep() {
+            if (currentStep < sections.length - 1) {
+                sections[currentStep].classList.remove('active');
+                currentStep++;
+                sections[currentStep].classList.add('active');
+                startHeartBurst(10);
+
+                if(currentStep === sections.length - 1) {
+                    clickPrompt.innerHTML = "❤️";
+                    startCarousel();
+                    setInterval(createHeart, 500);
+                }
+            } else {
+                startHeartBurst(5);
+            }
+        }
+
+        document.body.addEventListener('click', nextStep);
+        setInterval(createHeart, 1000);
+    </script>
+</body>
+</html>
